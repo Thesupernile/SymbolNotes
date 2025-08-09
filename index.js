@@ -65,10 +65,13 @@ submitConnection.addEventListener("click", () => {
 });
 
 var selfParagraphText = "";     // Stores the sequence of keys that the user has pressed in the past
-var friendParagraphText = "";   // Stores the sequence of keys that the user has pressed in the past
+var friendParagraphText = "";   // Stores the sequence of keys that the other user has pressed in the past
 
-const canvas = document.getElementById("symbolText");
-const ctx = canvas.getContext("2d");
+const selfCanvas = document.getElementById("symbolText");
+const selfCtx = selfCanvas.getContext("2d");
+
+const otherCanvas = document.getElementById("remoteUserText");
+const otherCtx = otherCanvas.getContext("2d");
 
 // Create the pairings between letters and images
 const letterImageMap = new Map();
@@ -101,6 +104,7 @@ letterImageMap.set("b", "blueLight");
 letterImageMap.set("n", "blueDark");
 letterImageMap.set("m", "purple");
 letterImageMap.set(",", "pink");
+
 letterImageMap.set(" ", "space");
 
 
@@ -113,32 +117,57 @@ document.body.onkeydown = function (key) {
 };
 
 function drawText(){
-    let drawX = 0;
-    let drawY = 0;
+    let userCanvas = document.getElementById("symbolText");
+    let otherCanvas = document.getElementById("remoteUserText");
+
+    let selfCanvasDrawX = 0;
+    let selfCanvasDrawY = 0;
+
+    let otherCanvasDrawX = 0;
+    let otherCanvasDrawY = 0;
 
     const XIncrement = 64;
     const YIncrement = 64;
 
     for (let i = 0; i < selfParagraphText.length; i++){
-        ctx.drawImage(document.getElementById(letterImageMap.get(selfParagraphText[i])), drawX, drawY);
-        drawX += XIncrement;
-        if (drawX + XIncrement > canvas.width){
-            drawX = 0;
-            drawY += YIncrement;
+        selfCtx.drawImage(document.getElementById(letterImageMap.get(selfParagraphText[i])), selfCanvasDrawX, selfCanvasDrawY);
+        selfCanvasDrawX += XIncrement;
+        if (selfCanvasDrawX + XIncrement > userCanvas.width){
+            selfCanvasDrawX = 0;
+            selfCanvasDrawY += YIncrement;
+        }
+    }
+
+    for (let i = 0; i < friendParagraphText.length; i++){
+        selfCtx.drawImage(document.getElementById(letterImageMap.get(friendParagraphText[i])), otherCanvasDrawX, otherCanvasDrawY);
+        otherCanvasDrawX += XIncrement;
+        if (otherCanvasDrawX + XIncrement > otherCanvas.width){
+            otherCanvasDrawX = 0;
+            otherCanvasDrawY += YIncrement;
         }
     }
 }
 
 
 function resizePage() {
-  var canvas = document.getElementById("symbolText");
-  canvas.width = window.innerWidth * 0.9;
-  canvas.height = window.innerHeight * 0.8;
+  let userCanvas = document.getElementById("symbolText");
+  let otherCanvas = document.getElementById("remoteUserText");
 
-  // Clear Canvas 
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "rgba(222, 230, 246, 1)";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  userCanvas.width = window.innerWidth * 0.4;
+  userCanvas.height = window.innerHeight * 0.8;
+
+  otherCanvas.width = window.innerWidth * 0.4;
+  otherCanvas.height = window.innerHeight * 0.8;
+
+  // Clear Canvases
+  selfCtx.fillStyle = "rgba(222, 230, 246, 1)";
+  otherCtx.fillStyle = "rgba(222, 230, 246, 1)";
+
+  selfCtx.clearRect(0, 0, userCanvas.width, userCanvas.height);
+  selfCtx.fillRect(0, 0, userCanvas.width, userCanvas.height);
+
+  otherCtx.clearRect(0, 0, otherCanvas.width, otherCanvas.height);
+  otherCtx.fillRect(0, 0, otherCanvas.width, otherCanvas.height);
 }
 
 window.onload = window.onresize = function () {
