@@ -45,10 +45,11 @@ function setupConnection(connection) {
     console.log("connected to", conn.peer);
     codeEntryContainer.classList.add("hidden");
     connectedIndicator.classList.remove("hidden");
-    setTimeout(() => connectedIndicator.classList.add("hidden"), 2000);
+    setTimeout(() => connectedIndicator.classList.add("hidden"), 1500);
   });
   conn.on("data", (data) => {
     console.log("received", data);
+    receiveKey(data);
   });
 }
 
@@ -65,6 +66,11 @@ submitConnection.addEventListener("click", () => {
   const connection = peer.connect("symbolnotes" + peerCode);
   setupConnection(connection);
 });
+
+function sendKey(key) {
+  conn.send(key);
+}
+
 
 var selfParagraphText = "";     // Stores the sequence of keys that the user has pressed in the past
 var friendParagraphText = "";   // Stores the sequence of keys that the user has pressed in the past
@@ -110,9 +116,14 @@ letterImageMap.set(" ", "space");
 document.body.onkeydown = function (key) {
   if (letterImageMap.has(key.key)) {
     selfParagraphText += key.key;
+    sendKey(key.key);
   }
   drawText();
 };
+
+function receiveData(key) {
+  // do something
+}
 
 function drawText() {
   let drawX = 0;
