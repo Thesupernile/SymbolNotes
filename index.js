@@ -23,12 +23,12 @@ letterImageMap.set('j', "");
 letterImageMap.set('k', "");
 letterImageMap.set('l', "");
 
-letterImageMap.set('z', "");
-letterImageMap.set('x', "");
-letterImageMap.set('c', "");
-letterImageMap.set('v', "");
-letterImageMap.set('b', "");
-letterImageMap.set('n', "");
-letterImageMap.set('m', "");
-letterImageMap.set(',', "");
+letterImageMap.set('z', "Symbols/red.png");
+letterImageMap.set('x', "Symbols/orange.png");
+letterImageMap.set('c', "Symbols/yellow.png");
+letterImageMap.set('v', "Symbols/green.png");
+letterImageMap.set('b', "Symbols/blueLight.png");
+letterImageMap.set('n', "Symbols/blueDark.png");
+letterImageMap.set('m', "Symbols/purple.png");
+letterImageMap.set(',', "Symbols/pink.png");
 
