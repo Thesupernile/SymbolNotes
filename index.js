@@ -2,6 +2,8 @@ import {Peer} from "https://esm.sh/peerjs@1.5.5?bundle-deps";
 
 let myCode = "";
 let peerCode = "";
+let peer = null;
+let conn = null;
 
 const myCodeContainer = document.getElementById("my-code-container");
 const myCodeEntry = document.getElementById("my-code-entry");
@@ -35,9 +37,8 @@ for (const entry of peerCodeEntry.children) {
   });
 }
 
-let peer;
-
-function setupConnection(conn) {
+function setupConnection(connection) {
+  conn = connection;
   conn.on("open", () => {
     console.log("connected to", conn.peer);
     submitConnection.classList.add("hidden");
@@ -49,10 +50,17 @@ function setupConnection(conn) {
 
 submitConnection.addEventListener("click", () => {
   if (!peer || !myCode || !peerCode) return;
-  const conn = peer.connect("symbolnotes" + peerCode);
-  setupConnection(conn);
+  if (myCode === peerCode) {
+    alert("Cannot connect to yourself.");
+    return;
+  }
+  if (conn && conn.open) {
+    console.log("Already connected");
+    return;
+  }
+  const connection = peer.connect("symbolnotes" + peerCode);
+  setupConnection(connection);
 });
-
 var paragraphText = "";     // Stores the sequence of keys that the user has pressed in the past
 
 const canvas = document.getElementById("symbolText");
