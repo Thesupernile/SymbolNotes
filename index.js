@@ -123,6 +123,10 @@ document.body.onkeydown = function (key) {
     selfParagraphText += key.key;
     sendKey(key.key);
   }
+  else if (key.key === "Backspace"){
+    selfParagraphText = selfParagraphText.slice(0, -1);
+    sendKey(key.key);
+  }
   drawText();
 };
 
@@ -130,6 +134,9 @@ function receiveKey(key) {
   // do something
   if (letterImageMap.has(key)){
     friendParagraphText += key;
+  }
+  else if (key === "Backspace"){
+    friendParagraphText = friendParagraphText.slice(0, -1);
   }
   drawText();
 }
@@ -146,6 +153,8 @@ function drawText(){
 
     const XIncrement = 64;
     const YIncrement = 64;
+
+    canvasClear();
 
     for (let i = 0; i < selfParagraphText.length; i++){
         selfCtx.drawImage(document.getElementById(letterImageMap.get(selfParagraphText[i])), selfCanvasDrawX, selfCanvasDrawY);
@@ -166,6 +175,20 @@ function drawText(){
     }
 }
 
+function canvasClear(){
+  let userCanvas = document.getElementById("symbolText");
+  let otherCanvas = document.getElementById("remoteUserText");
+
+  // Clear Canvases
+  selfCtx.fillStyle = "rgba(222, 230, 246, 1)";
+  otherCtx.fillStyle = "rgba(222, 230, 246, 1)";
+
+  selfCtx.clearRect(0, 0, userCanvas.width, userCanvas.height);
+  selfCtx.fillRect(0, 0, userCanvas.width, userCanvas.height);
+
+  otherCtx.clearRect(0, 0, otherCanvas.width, otherCanvas.height);
+  otherCtx.fillRect(0, 0, otherCanvas.width, otherCanvas.height);
+}
 
 function resizePage() {
   let userCanvas = document.getElementById("symbolText");
@@ -177,15 +200,9 @@ function resizePage() {
   otherCanvas.width = window.innerWidth * 0.4;
   otherCanvas.height = window.innerHeight * 0.8;
 
-  // Clear Canvases
-  selfCtx.fillStyle = "rgba(222, 230, 246, 1)";
-  otherCtx.fillStyle = "rgba(222, 230, 246, 1)";
+  canvasClear();
 
-  selfCtx.clearRect(0, 0, userCanvas.width, userCanvas.height);
-  selfCtx.fillRect(0, 0, userCanvas.width, userCanvas.height);
-
-  otherCtx.clearRect(0, 0, otherCanvas.width, otherCanvas.height);
-  otherCtx.fillRect(0, 0, otherCanvas.width, otherCanvas.height);
+  drawText();
 }
 
 window.onload = window.onresize = function () {
