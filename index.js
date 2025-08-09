@@ -7,7 +7,7 @@ const ctx = canvas.getContext("2d");
 const letterImageMap = new Map();
 letterImageMap.set("q", "notebook");
 letterImageMap.set("w", "stop");
-letterImageMap.set("e", "");
+letterImageMap.set("e", "dolphin");
 letterImageMap.set("r", "");
 letterImageMap.set("t", "");
 letterImageMap.set("y", "");
@@ -34,6 +34,7 @@ letterImageMap.set("b", "blueLight");
 letterImageMap.set("n", "blueDark");
 letterImageMap.set("m", "purple");
 letterImageMap.set(",", "pink");
+letterImageMap.set(" ", "space");
 
 
 // Register when a key is pressed and add it to the paragraphText
