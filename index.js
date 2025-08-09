@@ -139,12 +139,8 @@ function drawText(){
     let otherCanvasDrawX = 0;
     let otherCanvasDrawY = 0;
 
-function drawText() {
-  let drawX = 0;
-  let drawY = 0;
-
-  const XIncrement = 64;
-  const YIncrement = 64;
+    const XIncrement = 64;
+    const YIncrement = 64;
 
     for (let i = 0; i < selfParagraphText.length; i++){
         selfCtx.drawImage(document.getElementById(letterImageMap.get(selfParagraphText[i])), selfCanvasDrawX, selfCanvasDrawY);
