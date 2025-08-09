@@ -1,33 +1,41 @@
 import {Peer} from "https://esm.sh/peerjs@1.5.5?bundle-deps";
 
-let code = "";
+let myCode = "";
+let peerCode = "";
+
+const myCodeContainer = document.getElementById("my-code-container");
+const myCodeEntry = document.getElementById("my-code-entry");
+const peerCodeContainer = document.getElementById("peer-code-container");
+const peerCodeEntry = document.getElementById("peer-code-entry");
 const submitConnection = document.getElementById("submit-connection");
-const codeContainer = document.getElementById("code-container");
-const codeEntryContainer = document.getElementById("code-entry");
-for (const entry of codeEntryContainer.children) {
+
+for (const entry of myCodeContainer.children) {
   entry.addEventListener("click", () => {
-    code += entry.alt;
+    myCode += entry.alt;
     const img = document.createElement("img");
     img.src = entry.src;
-    codeContainer.append(img);
-    console.log(code);
+    myCodeContainer.append(img);
+    if (peer) peer.destroy();
+    peer = new Peer("symbolnotes" + myCode);
+    peer.on("open", () => {
+      console.log("peer opened with id", "symbolnotes" + myCode);
+    });
+    peer.on("connection", (incomingConn) => {
+      setupConnection(incomingConn);
+    });
+  });
+}
+
+for (const entry of peerCodeEntry.children) {
+  entry.addEventListener("click", () => {
+    peerCode += entry.alt;
+    const img = document.createElement("img");
+    img.src = entry.src;
+    peerCodeContainer.append(img);
   });
 }
 
 let peer;
-
-function createPeer() {
-  if (peer) peer.destroy();
-  peer = new Peer("symbolnotes" + code);
-  console.log(peer);
-  peer.on("open", (id) => {
-    console.log("opened");
-  });
-  peer.on("connection", (incomingConn) => {
-    console.log("connected");
-    setupConnection(incomingConn);
-  });
-}
 
 function setupConnection(conn) {
   conn.on("open", () => {
@@ -40,16 +48,9 @@ function setupConnection(conn) {
 }
 
 submitConnection.addEventListener("click", () => {
-  console.log("creating");
-  createPeer();
-});
-
-submitConnection.addEventListener("click", () => {
-  peer.connect("symbolnotes" + code);
-  peer.on("open", () => {
-    console.log("open");
-    submitConnection.classList.add("hidden");
-  });
+  if (!peer || !myCode || !peerCode) return;
+  const conn = peer.connect("symbolnotes" + peerCode);
+  setupConnection(conn);
 });
 
 var paragraphText = "";     // Stores the sequence of keys that the user has pressed in the past
