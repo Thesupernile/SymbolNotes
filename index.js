@@ -10,6 +10,7 @@ const myCodeEntry = document.getElementById("my-code-entry");
 const peerCodeContainer = document.getElementById("peer-code-container");
 const peerCodeEntry = document.getElementById("peer-code-entry");
 const submitConnection = document.getElementById("submit-connection");
+const connectedIndicator = document.getElementById("connected-indicator");
 
 for (const entry of myCodeEntry.children) {
   entry.addEventListener("click", () => {
@@ -42,6 +43,7 @@ function setupConnection(connection) {
   conn.on("open", () => {
     console.log("connected to", conn.peer);
     submitConnection.classList.add("hidden");
+    connectedIndicator.classList.remove("hidden")
   });
   conn.on("data", (data) => {
     console.log("received", data);
@@ -61,6 +63,7 @@ submitConnection.addEventListener("click", () => {
   const connection = peer.connect("symbolnotes" + peerCode);
   setupConnection(connection);
 });
+
 var paragraphText = "";     // Stores the sequence of keys that the user has pressed in the past
 
 const canvas = document.getElementById("symbolText");
@@ -100,28 +103,28 @@ letterImageMap.set(",", "pink");
 
 
 // Register when a key is pressed and add it to the paragraphText
-document.body.onkeydown = function(key){
-    paragraphText += key.key;
-    console.log(paragraphText);
-    drawText();
+document.body.onkeydown = function (key) {
+  paragraphText += key.key;
+  console.log(paragraphText);
+  drawText();
+};
+
+function drawText() {
+
 }
 
-function drawText(){
-    
+
+function resizePage() {
+  var canvas = document.getElementById("symbolText");
+  canvas.width = window.innerWidth * 0.9;
+  canvas.height = window.innerHeight * 0.8;
+
+  // Clear Canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "rgba(222, 230, 246, 1)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
-
-function resizePage(){
-    var canvas = document.getElementById("symbolText");
-    canvas.width = window.innerWidth * 0.9;
-    canvas.height = window.innerHeight * 0.8;
-
-    // Clear Canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "rgba(222, 230, 246, 1)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-}
-
-window.onload = window.onresize = function() {
-    resizePage();
-}
+window.onload = window.onresize = function () {
+  resizePage();
+};
