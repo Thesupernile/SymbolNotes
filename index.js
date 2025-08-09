@@ -91,16 +91,16 @@ letterImageMap.set("t", "car");
 letterImageMap.set("y", "checkmark");
 letterImageMap.set("u", "cross");
 letterImageMap.set("i", "danger");
-letterImageMap.set("o", "downarrow");
-letterImageMap.set("p", "happy");
+letterImageMap.set("o", "happy");
+letterImageMap.set("p", "sad");
 
 letterImageMap.set("a", "heart");
 letterImageMap.set("s", "leftarrow");
-letterImageMap.set("d", "lightbulb");
-letterImageMap.set("f", "moon");
+letterImageMap.set("d", "downarrow");
+letterImageMap.set("f", "uparrow");
 letterImageMap.set("g", "rightarrow");
-letterImageMap.set("h", "sad");
-letterImageMap.set("j", "speechbubble");
+letterImageMap.set("h", "lightbulb");
+letterImageMap.set("j", "moon");
 letterImageMap.set("k", "star");
 letterImageMap.set("l", "sun");
 
@@ -112,7 +112,7 @@ letterImageMap.set("b", "blueLight");
 letterImageMap.set("n", "blueDark");
 letterImageMap.set("m", "purple");
 letterImageMap.set(",", "pink");
-letterImageMap.set(".", "uparrow");
+letterImageMap.set(".", "speechbubble");
 
 letterImageMap.set(" ", "space");
 
