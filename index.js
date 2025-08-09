@@ -86,23 +86,23 @@ const letterImageMap = new Map();
 letterImageMap.set("q", "notebook");
 letterImageMap.set("w", "stop");
 letterImageMap.set("e", "dolphin");
-letterImageMap.set("r", "");
-letterImageMap.set("t", "");
-letterImageMap.set("y", "");
-letterImageMap.set("u", "");
-letterImageMap.set("i", "");
-letterImageMap.set("o", "");
-letterImageMap.set("p", "");
+letterImageMap.set("r", "calender");
+letterImageMap.set("t", "car");
+letterImageMap.set("y", "checkmark");
+letterImageMap.set("u", "cross");
+letterImageMap.set("i", "danger");
+letterImageMap.set("o", "downarrow");
+letterImageMap.set("p", "happy");
 
-letterImageMap.set("a", "");
-letterImageMap.set("s", "");
-letterImageMap.set("d", "");
-letterImageMap.set("f", "");
-letterImageMap.set("g", "");
-letterImageMap.set("h", "");
-letterImageMap.set("j", "");
-letterImageMap.set("k", "");
-letterImageMap.set("l", "");
+letterImageMap.set("a", "heart");
+letterImageMap.set("s", "leftarrow");
+letterImageMap.set("d", "lightbulb");
+letterImageMap.set("f", "moon");
+letterImageMap.set("g", "rightarrow");
+letterImageMap.set("h", "sad");
+letterImageMap.set("j", "speechbubble");
+letterImageMap.set("k", "star");
+letterImageMap.set("l", "sun");
 
 letterImageMap.set("z", "red");
 letterImageMap.set("x", "orange");
@@ -112,6 +112,7 @@ letterImageMap.set("b", "blueLight");
 letterImageMap.set("n", "blueDark");
 letterImageMap.set("m", "purple");
 letterImageMap.set(",", "pink");
+letterImageMap.set(".", "uparrow");
 
 letterImageMap.set(" ", "space");
 
