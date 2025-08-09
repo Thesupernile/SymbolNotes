@@ -1,18 +1,3 @@
-import {Peer} from "https://esm.sh/peerjs@1.5.5?bundle-deps";
-
-const peer = new Peer();
-let conn = null;
-let code = "";
-const submitConnection = document.getElementById("submit-connection");
-const connectionInput = document.getElementById("connection-input");
-
-submitConnection.addEventListener("click", () => {
-  peer.connect("symbolnotes" + code);
-  peer.on("open", () => {
-    submitConnection.classList.add("hidden");
-  });
-});
-
 var paragraphText = "";     // Stores the sequence of keys that the user has pressed in the past
 
 const canvas = document.getElementById("symbolText");
@@ -59,7 +44,20 @@ document.body.onkeydown = function(key){
 }
 
 function drawText(){
-    
+    let drawX = 0;
+    let drawY = 0;
+
+    const XIncrement = 64;
+    const YIncrement = 64;
+
+    for (let i = 0; i < paragraphText.length; i++){
+        ctx.drawImage(document.getElementById(letterImageMap.get(paragraphText[i])), drawX, drawY);
+        drawX += XIncrement;
+        if (drawX + XIncrement > canvas.width){
+            drawX = 0;
+            drawY += YIncrement;
+        }
+    }
 }
 
 
