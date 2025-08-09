@@ -35,7 +35,6 @@ letterImageMap.set(',', "symbols/pink.png");
 
 // Register when a key is pressed and add it to the paragraphText
 document.body.onkeydown = function(key){
-    
-    paragraphText += key.value;
+    paragraphText += key.key;
     console.log(paragraphText);
 }
