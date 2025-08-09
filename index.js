@@ -9,7 +9,7 @@ const peerCodeContainer = document.getElementById("peer-code-container");
 const peerCodeEntry = document.getElementById("peer-code-entry");
 const submitConnection = document.getElementById("submit-connection");
 
-for (const entry of myCodeContainer.children) {
+for (const entry of myCodeEntry.children) {
   entry.addEventListener("click", () => {
     myCode += entry.alt;
     const img = document.createElement("img");
