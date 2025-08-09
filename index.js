@@ -5,6 +5,7 @@ let peerCode = "";
 let peer = null;
 let conn = null;
 
+const codeEntryContainer = document.getElementById("code-entry-container");
 const myCodeContainer = document.getElementById("my-code-container");
 const myCodeEntry = document.getElementById("my-code-entry");
 const peerCodeContainer = document.getElementById("peer-code-container");
@@ -42,11 +43,13 @@ function setupConnection(connection) {
   conn = connection;
   conn.on("open", () => {
     console.log("connected to", conn.peer);
-    submitConnection.classList.add("hidden");
-    connectedIndicator.classList.remove("hidden")
+    codeEntryContainer.classList.add("hidden");
+    connectedIndicator.classList.remove("hidden");
+    setTimeout(() => connectedIndicator.classList.add("hidden"), 1500);
   });
   conn.on("data", (data) => {
     console.log("received", data);
+    receiveKey(data);
   });
 }
 
@@ -63,6 +66,11 @@ submitConnection.addEventListener("click", () => {
   const connection = peer.connect("symbolnotes" + peerCode);
   setupConnection(connection);
 });
+
+function sendKey(key) {
+  conn.send(key);
+}
+
 
 var selfParagraphText = "";     // Stores the sequence of keys that the user has pressed in the past
 var friendParagraphText = "";   // Stores the sequence of keys that the other user has pressed in the past
@@ -110,11 +118,16 @@ letterImageMap.set(" ", "space");
 
 // Register when a key is pressed and add it to the paragraphText
 document.body.onkeydown = function (key) {
-  if (letterImageMap.has(key.key)){
-      selfParagraphText += key.key;
+  if (letterImageMap.has(key.key)) {
+    selfParagraphText += key.key;
+    sendKey(key.key);
   }
   drawText();
 };
+
+function receiveData(key) {
+  // do something
+}
 
 function drawText(){
     let userCanvas = document.getElementById("symbolText");
@@ -126,8 +139,12 @@ function drawText(){
     let otherCanvasDrawX = 0;
     let otherCanvasDrawY = 0;
 
-    const XIncrement = 64;
-    const YIncrement = 64;
+function drawText() {
+  let drawX = 0;
+  let drawY = 0;
+
+  const XIncrement = 64;
+  const YIncrement = 64;
 
     for (let i = 0; i < selfParagraphText.length; i++){
         selfCtx.drawImage(document.getElementById(letterImageMap.get(selfParagraphText[i])), selfCanvasDrawX, selfCanvasDrawY);

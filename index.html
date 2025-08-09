@@ -8,43 +8,45 @@
 
 
 <body>
-<div>
-    <img alt="You" class="peerjs-label" src="assets/you.svg">
-    <div id="my-code-container"></div>
-    <div id="my-code-entry">
-        <img alt="0" src="symbols/blueDark.png">
-        <img alt="1" src="symbols/blueLight.png">
-        <img alt="2" src="symbols/green.png">
-        <img alt="3" src="symbols/orange.png">
-        <img alt="4" src="symbols/pink.png">
-        <img alt="5" src="symbols/purple.png">
+<div id="code-entry-container">
+    <div>
+        <img alt="You" class="peerjs-label" src="assets/you.svg">
+        <div id="my-code-container"></div>
+        <div id="my-code-entry">
+            <img alt="0" src="symbols/blueDark.png">
+            <img alt="1" src="symbols/blueLight.png">
+            <img alt="2" src="symbols/green.png">
+            <img alt="3" src="symbols/orange.png">
+            <img alt="4" src="symbols/pink.png">
+            <img alt="5" src="symbols/purple.png">
+        </div>
     </div>
-</div>
-<div>
-    <img alt="Friend" class="peerjs-label" src="assets/friend.svg">
-    <div id="peer-code-container"></div>
-    <div id="peer-code-entry">
-        <img alt="0" src="symbols/blueDark.png" id="blueDark">
-        <img alt="1" src="symbols/blueLight.png" id="blueLight">
-        <img alt="2" src="symbols/green.png" id="green">
-        <img alt="3" src="symbols/orange.png" id="orange">
-        <img alt="4" src="symbols/pink.png" id="pink">
-        <img alt="5" src="symbols/purple.png" id = "purple">
+    <div>
+        <img alt="Friend" class="peerjs-label" src="assets/friend.svg">
+        <div id="peer-code-container"></div>
+        <div id="peer-code-entry">
+            <img alt="0" id="blueDark" src="symbols/blueDark.png">
+            <img alt="1" id="blueLight" src="symbols/blueLight.png">
+            <img alt="2" id="green" src="symbols/green.png">
+            <img alt="3" id="orange" src="symbols/orange.png">
+            <img alt="4" id="pink" src="symbols/pink.png">
+            <img alt="5" id="purple" src="symbols/purple.png">
+        </div>
     </div>
+    <button id="submit-connection"><img alt="Submit" src="symbols/pink.png"></button>
 </div>
-<button id="submit-connection"><img alt="Submit" src="symbols/pink.png"></button>
 <img alt="Connected" class="hidden peerjs-label" id="connected-indicator" src="assets/check.svg">
 <div>
     <canvas class="symbolCanvas" id="symbolText"> Unfortunately canvas is not supported by your browser </canvas>
     <canvas class="symbolCanvas" id="remoteUserText"> Unfortunately canvas is not supported by your browser </canvas>
 </div>
 <div style="display: none;">
-    <img src="symbols/red.png" id = "red">
-    <img src="symbols/yellow.png" id = "yellow">
-    <img src="symbols/notebook.png" id = "notebook">
-    <img src="symbols/dolphin.png" id = "dolphin">
-    <img src="symbols/stop.png" id = "stop">
-    <img src="symbols/space.png" id = "space">
+    <img id="red" src="symbols/red.png">
+    <img id="yellow" src="symbols/yellow.png">
+    <img id="notebook" src="symbols/notebook.png">
+    <img id="dolphin" src="symbols/dolphin.png">
+    <img id="stop" src="symbols/stop.png">
+    <img id="space" src="symbols/space.png">
 </div>
 <script src="index.js" type="module"></script>
 </body>
