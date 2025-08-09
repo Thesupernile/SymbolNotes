@@ -1,7 +1,5 @@
 import {Peer} from "https://esm.sh/peerjs@1.5.5?bundle-deps";
 
-const peer = new Peer();
-let conn = null;
 let code = "";
 const submitConnection = document.getElementById("submit-connection");
 const codeContainer = document.getElementById("code-container");
@@ -11,11 +9,40 @@ for (const entry of codeEntryContainer.children) {
     code += entry.alt;
     const img = document.createElement("img");
     img.src = entry.src;
-    codeContainer.append(img)
+    codeContainer.append(img);
     console.log(code);
   });
 }
 
+let peer;
+
+function createPeer() {
+  if (peer) peer.destroy();
+  peer = new Peer("symbolnotes" + code);
+  console.log(peer);
+  peer.on("open", (id) => {
+    console.log("opened");
+  });
+  peer.on("connection", (incomingConn) => {
+    console.log("connected");
+    setupConnection(incomingConn);
+  });
+}
+
+function setupConnection(conn) {
+  conn.on("open", () => {
+    console.log("connected to", conn.peer);
+    submitConnection.classList.add("hidden");
+  });
+  conn.on("data", (data) => {
+    console.log("received", data);
+  });
+}
+
+submitConnection.addEventListener("click", () => {
+  console.log("creating");
+  createPeer();
+});
 
 submitConnection.addEventListener("click", () => {
   peer.connect("symbolnotes" + code);
