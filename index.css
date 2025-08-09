@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .symbolCanvas {
     border: solid;
     border-width: 3px;
@@ -5,3 +6,8 @@
     border-radius: 5px;
     margin-left: 4%;
 }
+=======
+.hidden {
+    display: none;
+}
+>>>>>>> 98ea1774fb280084f33b3527be8651112548e832
