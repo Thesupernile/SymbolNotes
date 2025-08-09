@@ -125,8 +125,12 @@ document.body.onkeydown = function (key) {
   drawText();
 };
 
-function receiveData(key) {
+function receiveKey(key) {
   // do something
+  if (letterImageMap.has(key)){
+    friendParagraphText += key;
+  }
+  drawText();
 }
 
 function drawText(){
@@ -152,7 +156,7 @@ function drawText(){
     }
 
     for (let i = 0; i < friendParagraphText.length; i++){
-        selfCtx.drawImage(document.getElementById(letterImageMap.get(friendParagraphText[i])), otherCanvasDrawX, otherCanvasDrawY);
+        otherCtx.drawImage(document.getElementById(letterImageMap.get(friendParagraphText[i])), otherCanvasDrawX, otherCanvasDrawY);
         otherCanvasDrawX += XIncrement;
         if (otherCanvasDrawX + XIncrement > otherCanvas.width){
             otherCanvasDrawX = 0;
