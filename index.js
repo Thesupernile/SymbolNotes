@@ -4,11 +4,23 @@ const peer = new Peer();
 let conn = null;
 let code = "";
 const submitConnection = document.getElementById("submit-connection");
-const connectionInput = document.getElementById("connection-input");
+const codeContainer = document.getElementById("code-container");
+const codeEntryContainer = document.getElementById("code-entry");
+for (const entry of codeEntryContainer.children) {
+  entry.addEventListener("click", () => {
+    code += entry.alt;
+    const img = document.createElement("img");
+    img.src = entry.src;
+    codeContainer.append(img)
+    console.log(code);
+  });
+}
+
 
 submitConnection.addEventListener("click", () => {
   peer.connect("symbolnotes" + code);
   peer.on("open", () => {
+    console.log("open");
     submitConnection.classList.add("hidden");
   });
 });
