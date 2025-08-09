@@ -1,20 +1,29 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <head>
     <link href="index.css" rel="stylesheet">
     <title>Symbol Notes</title>
-    <!--<link href="symbols/icon.png" rel="icon" type="image/x-icon">-->
+    <link href="symbols/notebook.png" rel="icon" type="image/x-icon">
 </head>
 
 
 <body>
-    <br>
-    <div width="90%" height="80%">
-        <canvas class="symbolCanvas" id="symbolText">Unfortunately canvas is not supported by your browser</canvas>
+<div>
+    <img alt="You" src="assets/you.svg" class="peerjs-label">
+    <div id="my-code-container"></div>
+    <div id="my-code-entry">
+        <img alt="0" src="symbols/blueDark.png">
+        <img alt="1" src="symbols/blueLight.png">
+        <img alt="2" src="symbols/green.png">
+        <img alt="3" src="symbols/orange.png">
+        <img alt="4" src="symbols/pink.png">
+        <img alt="5" src="symbols/purple.png">
     </div>
-
-    <div id="code-container"></div>
-    <div id="code-entry">
+</div>
+<div>
+    <img alt="Friend" src="assets/friend.svg" class="peerjs-label">
+    <div id="peer-code-container"></div>
+    <div id="peer-code-entry">
         <img alt="0" src="symbols/blueDark.png" id="blueDark">
         <img alt="1" src="symbols/blueLight.png" id="blueLight">
         <img alt="2" src="symbols/green.png" id="green">
@@ -28,8 +37,13 @@
         <img alt="10" src="symbols/stop.png" id = "stop">
         <img alt="11" src="symbols/space.png" id = "space">
     </div>
-
-    <button id="submit-connection"><img alt="Submit" src="symbols/pink.png"></button>
-    <script src="index.js"></script>
+</div>
+<button id="submit-connection"><img alt="Submit" src="symbols/pink.png"></button>
+<img alt="Connected" src=""
+<div height="80%" width="90%">
+    <canvas class="symbolCanvas" id="symbolText">Unfortunately canvas is not supported by your browser</canvas>
+</div>
+<img alt="Notebook" src="symbols/notebook.png">
+<script src="index.js" type="module"></script>
 </body>
 </html>

@@ -1,3 +1,66 @@
+import {Peer} from "https://esm.sh/peerjs@1.5.5?bundle-deps";
+
+let myCode = "";
+let peerCode = "";
+let peer = null;
+let conn = null;
+
+const myCodeContainer = document.getElementById("my-code-container");
+const myCodeEntry = document.getElementById("my-code-entry");
+const peerCodeContainer = document.getElementById("peer-code-container");
+const peerCodeEntry = document.getElementById("peer-code-entry");
+const submitConnection = document.getElementById("submit-connection");
+
+for (const entry of myCodeEntry.children) {
+  entry.addEventListener("click", () => {
+    myCode += entry.alt;
+    const img = document.createElement("img");
+    img.src = entry.src;
+    myCodeContainer.append(img);
+    if (peer) peer.destroy();
+    peer = new Peer("symbolnotes" + myCode);
+    peer.on("open", () => {
+      console.log("peer opened with id", "symbolnotes" + myCode);
+    });
+    peer.on("connection", (incomingConn) => {
+      setupConnection(incomingConn);
+    });
+  });
+}
+
+for (const entry of peerCodeEntry.children) {
+  entry.addEventListener("click", () => {
+    peerCode += entry.alt;
+    const img = document.createElement("img");
+    img.src = entry.src;
+    peerCodeContainer.append(img);
+  });
+}
+
+function setupConnection(connection) {
+  conn = connection;
+  conn.on("open", () => {
+    console.log("connected to", conn.peer);
+    submitConnection.classList.add("hidden");
+  });
+  conn.on("data", (data) => {
+    console.log("received", data);
+  });
+}
+
+submitConnection.addEventListener("click", () => {
+  if (!peer || !myCode || !peerCode) return;
+  if (myCode === peerCode) {
+    alert("Cannot connect to yourself.");
+    return;
+  }
+  if (conn && conn.open) {
+    console.log("Already connected");
+    return;
+  }
+  const connection = peer.connect("symbolnotes" + peerCode);
+  setupConnection(connection);
+});
 var paragraphText = "";     // Stores the sequence of keys that the user has pressed in the past
 
 const canvas = document.getElementById("symbolText");
