@@ -1,5 +1,8 @@
 var paragraphText = "";     // Stores the sequence of keys that the user has pressed in the past
 
+const canvas = document.getElementById("symbolText");
+const ctx = canvas.getContext("2d");
+
 // Create the pairings between letters and images
 const letterImageMap = new Map();
 letterImageMap.set('q', "symbols/notebook.png");
@@ -37,4 +40,25 @@ letterImageMap.set(',', "symbols/pink.png");
 document.body.onkeydown = function(key){
     paragraphText += key.key;
     console.log(paragraphText);
+    drawText();
+}
+
+function drawText(){
+    
+}
+
+
+function resizePage(){
+    var canvas = document.getElementById("symbolText");
+    canvas.width = window.innerWidth * 0.9;
+    canvas.height = window.innerHeight * 0.8;
+
+    // Clear Canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "rgba(222, 230, 246, 1)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+window.onload = window.onresize = function() {
+    resizePage();
 }
