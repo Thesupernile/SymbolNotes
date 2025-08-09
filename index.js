@@ -105,7 +105,9 @@ letterImageMap.set(" ", "space");
 
 // Register when a key is pressed and add it to the paragraphText
 document.body.onkeydown = function (key) {
-  paragraphText += key.key;
+  if (letterImageMap.has(key.key)){
+      paragraphText += key.key;
+  }
   console.log(paragraphText);
   drawText();
 };
@@ -133,7 +135,7 @@ function resizePage() {
   canvas.width = window.innerWidth * 0.9;
   canvas.height = window.innerHeight * 0.8;
 
-  // Clear Canvas
+  // Clear Canvas 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = "rgba(222, 230, 246, 1)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
