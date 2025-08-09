@@ -64,7 +64,8 @@ submitConnection.addEventListener("click", () => {
   setupConnection(connection);
 });
 
-var paragraphText = "";     // Stores the sequence of keys that the user has pressed in the past
+var selfParagraphText = "";     // Stores the sequence of keys that the user has pressed in the past
+var friendParagraphText = "";   // Stores the sequence of keys that the user has pressed in the past
 
 const canvas = document.getElementById("symbolText");
 const ctx = canvas.getContext("2d");
@@ -106,9 +107,8 @@ letterImageMap.set(" ", "space");
 // Register when a key is pressed and add it to the paragraphText
 document.body.onkeydown = function (key) {
   if (letterImageMap.has(key.key)){
-      paragraphText += key.key;
+      selfParagraphText += key.key;
   }
-  console.log(paragraphText);
   drawText();
 };
 
@@ -119,8 +119,8 @@ function drawText(){
     const XIncrement = 64;
     const YIncrement = 64;
 
-    for (let i = 0; i < paragraphText.length; i++){
-        ctx.drawImage(document.getElementById(letterImageMap.get(paragraphText[i])), drawX, drawY);
+    for (let i = 0; i < selfParagraphText.length; i++){
+        ctx.drawImage(document.getElementById(letterImageMap.get(selfParagraphText[i])), drawX, drawY);
         drawX += XIncrement;
         if (drawX + XIncrement > canvas.width){
             drawX = 0;
