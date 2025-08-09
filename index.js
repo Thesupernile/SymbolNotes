@@ -2,8 +2,8 @@ var paragraphText = "";     // Stores the sequence of keys that the user has pre
 
 // Create the pairings between letters and images
 const letterImageMap = new Map();
-letterImageMap.set('q', "");
-letterImageMap.set('w', "");
+letterImageMap.set('q', "symbols/notebook.png");
+letterImageMap.set('w', "symbols/stop.png");
 letterImageMap.set('e', "");
 letterImageMap.set('r', "");
 letterImageMap.set('t', "");
@@ -32,3 +32,10 @@ letterImageMap.set('n', "symbols/blueDark.png");
 letterImageMap.set('m', "symbols/purple.png");
 letterImageMap.set(',', "symbols/pink.png");
 
+
+// Register when a key is pressed and add it to the paragraphText
+document.body.onkeydown = function(key){
+    
+    paragraphText += key.value;
+    console.log(paragraphText);
+}
