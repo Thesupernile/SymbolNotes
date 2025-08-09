@@ -1,3 +1,16 @@
+import {Peer} from "https://esm.sh/peerjs@1.5.5?bundle-deps"
+
+const peer = new Peer();
+let conn = null;
+document.getElementById('submit-connection').addEventListener('click',()=>{
+    const code = document.getElementById('connection-input').value;
+    peer.connect('symbolnotes' + code)
+
+    peer.on('open', () => {
+      document.getElementById('submit-connection').classList.add('hidden')
+    })
+})
+
 var paragraphText = "";     // Stores the sequence of keys that the user has pressed in the past
 
 // Create the pairings between letters and images
@@ -35,7 +48,7 @@ letterImageMap.set(',', "symbols/pink.png");
 
 // Register when a key is pressed and add it to the paragraphText
 document.body.onkeydown = function(key){
-    
+
     paragraphText += key.value;
     console.log(paragraphText);
 }
